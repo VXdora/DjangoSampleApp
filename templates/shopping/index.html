@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'shopping/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="sbox_wrapper">
+    <form method="GET" action="{% static 'shopping:index' %}">
+        <div class="sbox">
+            <h5>キーワード</h5>
+            <input type="text" name="name">
+        </div>
+        <hr>
+        <div class="category">
+            <h5>カテゴリー</h5>
+            {% for category in categories %}
+                <p>
+                    <input type="checkbox" name="category" value="{{category.pk}}"> {{ category }}
+                </p>
+            {% endfor %}
+        </div>
+        <hr>
+        <input class="btn btn-primary b" type="submit" name="" value="検索する">
+    </form>
+</div>
+
+<div id="contents">
+{% for item in items %}
+    <div class="item_wrapper">
+        <div class="image_area">
+            <img src="/media/{{ item.image }}" height="100%">
+        </div>
+        <div class="item_name">
+            <a href="{% url 'shopping:detail' pk=item.pk %}">{{ item.name }}</a>
+        </div>
+        <div class="item_category">
+        {{ item.category }}
+        </div>
+        <div class="item_price">
+        &yen; {{ item.price | intcomma }}
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}
