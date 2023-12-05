@@ -1,11 +1,12 @@
 from django import http
 from django.shortcuts import render
 from .models import Item, Category
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 from django.views.generic import TemplateView
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'shopping/index.html'
 
     def get(self, request, *args, **kwargs):
@@ -18,7 +19,7 @@ class IndexView(TemplateView):
         return context
 
 from django.views.generic import DetailView
-class DetailView(DetailView):
+class DetailView(LoginRequiredMixin, DetailView):
     template_name = 'shopping/detail.html'
     model = Item
 
