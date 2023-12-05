@@ -8,6 +8,32 @@
 
 {% block content %}
 
-{{ object }}
+<div class="name">
+    {{ object.name }}
+</div>
+<div class="category">
+    {{ object.category }}
+</div>
+<hr>
+<div class="image">
+    <img src="/media/{{ object.image }}" width="100%">
+</div>
+<div class="space"></div>
+<div class="purchase_area">
+    <div class="price">
+        <p>&yen;{{ object.price | intcomma }}</p>
+    </div>
+    <p>数量：<input type="number" name="amount" id="" value="0"></p>
+    <button class="btn btn-warning bc">カートに入れる</button>
+</div>
+<hr>
+<div class="description">
+    <p>{{ object.description }}</p>
+</div>
 
+<div class="gohome">
+    <a href="{% url 'shopping:index' %}" class="bh btn btn-info">ホームへ戻る</a>
+</div>
+
+<div class="btmspace"></div>
 {% endblock %}
